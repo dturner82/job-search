@@ -1,0 +1,102 @@
+:root {
+	color-scheme: dark;
+	--background: #121719;
+	--surface: #1b2326;
+	--border: #344247;
+	--text: #f3f7f6;
+	--muted: #afbfbd;
+	--accent: #ade5ce;
+	--space: clamp(1rem, 3vw, 2rem);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--background);
+	color: var(--text);
+	font: 1rem/1.5 system-ui, sans-serif;
+}
+
+h1, h2, p, dl, dd {
+	margin: 0;
+}
+
+.dashboard {
+	max-width: 74rem;
+	margin: auto;
+	padding: clamp(2rem, 7vw, 6rem) var(--space);
+}
+
+.dashboard-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	margin-bottom: var(--space);
+}
+
+h1 {
+	font-size: clamp(2.5rem, 7vw, 4.75rem);
+	line-height: 1;
+	letter-spacing: -0.06em;
+}
+
+.dashboard-header p, .vacancy p, dt, .empty-state p {
+	color: var(--muted);
+}
+
+.empty-state, .vacancy {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 0.75rem;
+	padding: var(--space);
+}
+
+.empty-state p {
+	margin-top: 0.5rem;
+}
+
+.vacancies {
+	display: grid;
+	gap: 0.875rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.vacancy-heading {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	overflow-wrap: anywhere;
+}
+
+.vacancy h2 {
+	font-size: clamp(1.25rem, 3vw, 1.65rem);
+}
+
+.status {
+	border: 1px solid var(--border);
+	border-radius: 1rem;
+	color: var(--accent);
+	font-size: 0.875rem;
+	padding: 0.2rem 0.65rem;
+}
+
+dl {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+	gap: 0.75rem;
+	margin-top: 1rem;
+	overflow-wrap: anywhere;
+}
+
+dt {
+	font-size: 0.875rem;
+}

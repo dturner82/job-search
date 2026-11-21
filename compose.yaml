@@ -1,0 +1,18 @@
+name: job-search-dev
+
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      DATABASE_URL: file:/data/jobs.db
+    volumes:
+      - development-db:/data
+    command:
+      - sh
+      - -c
+      - npm run db:migrate && exec npm run dev -- --hostname 0.0.0.0
+
+volumes:
+  development-db:

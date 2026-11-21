@@ -1,0 +1,47 @@
+generator client {
+	provider = "prisma-client-js"
+}
+
+datasource db {
+	provider = "sqlite"
+	url      = env("DATABASE_URL")
+}
+
+enum ApplicationStatus {
+	NEW
+	SHORTLISTED
+	APPLIED
+	IGNORED
+}
+
+model ImportedMessage {
+	id          Int      @id @default(autoincrement())
+	mailbox     String
+	uidValidity BigInt
+	uid         BigInt
+	messageId   String?
+	subject     String?
+	receivedAt  DateTime
+	importedAt  DateTime @default(now())
+	jobs        Job[]
+
+	@@unique([mailbox, uidValidity, uid])
+}
+
+model Job {
+	id               Int               @id @default(autoincrement())
+	title            String
+	company          String?
+	location         String?
+	salary           String?
+	source           String
+	sourceVacancyId  String?
+	canonicalUrl     String?           @unique
+	discoveredAt     DateTime          @default(now())
+	status           ApplicationStatus @default(NEW)
+	firstMessageId   Int?
+	firstMessage     ImportedMessage?  @relation(fields: [firstMessageId], references: [id], onDelete: SetNull)
+
+	@@unique([source, sourceVacancyId])
+	@@index([discoveredAt, id])
+}
