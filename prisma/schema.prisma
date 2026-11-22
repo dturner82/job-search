@@ -12,6 +12,9 @@ enum ApplicationStatus {
 	SHORTLISTED
 	APPLIED
 	IGNORED
+	EXPIRED
+	UNSUITABLE
+	REJECTED
 }
 
 model ImportedMessage {
@@ -34,6 +37,8 @@ model Job {
 	company          String?
 	location         String?
 	salary           String?
+	alertExcerpt     String?
+	officeAttendance String?
 	source           String
 	sourceVacancyId  String?
 	canonicalUrl     String?           @unique

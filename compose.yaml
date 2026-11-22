@@ -14,5 +14,22 @@ services:
       - -c
       - npm run db:migrate && exec npm run dev -- --hostname 0.0.0.0
 
+  collector:
+    profiles: ["collection"]
+    build: .
+    environment:
+      DATABASE_URL: file:/data/jobs.db
+      ZOHO_HOST: ${ZOHO_HOST:-imap.zoho.eu}
+      ZOHO_PORT: ${ZOHO_PORT:-993}
+      ZOHO_FOLDER: ${ZOHO_FOLDER:-Job Alerts}
+      ZOHO_USER: ${ZOHO_USER:-}
+      ZOHO_PASSWORD: ${ZOHO_PASSWORD:-}
+    volumes:
+      - development-db:/data
+    command:
+      - sh
+      - -c
+      - npm run db:migrate && exec npm run collect
+
 volumes:
   development-db:
