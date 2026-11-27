@@ -19,7 +19,8 @@ services:
 
   collector:
     profiles: ["collection"]
-    build: .
+    image: job-search:prod
+    pull_policy: never
     environment:
       NODE_ENV: production
       DATABASE_URL: file:/data/jobs.db
