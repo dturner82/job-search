@@ -5,6 +5,18 @@ services:
     image: job-search:prod
     pull_policy: never
     restart: unless-stopped
+
+
+
+
+
+
+
+
+
+
+
+    
     ports:
       - "127.0.0.1:3200:3000"
     environment:
