@@ -8,6 +8,7 @@ export const statuses = {
 	UNSUITABLE: "Unsuitable",
 	REJECTED: "Rejected",
 	IGNORED: "Ignored",
+	DUPLICATE: "Duplicate",
 } satisfies Record<ApplicationStatus, string>;
 
 export function isApplicationStatus(value: unknown): value is ApplicationStatus {

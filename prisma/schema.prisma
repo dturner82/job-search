@@ -15,6 +15,7 @@ enum ApplicationStatus {
 	EXPIRED
 	UNSUITABLE
 	REJECTED
+	DUPLICATE
 }
 
 model ImportedMessage {

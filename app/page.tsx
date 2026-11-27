@@ -123,6 +123,16 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
 									{statusOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
 								</select>
 								<button type="submit">Save status</button>
+								{job.canonicalUrl && /^https?:\/\//i.test(job.canonicalUrl) && (
+									<a 
+										className="view-post" 
+										href={job.canonicalUrl} 
+										target="_blank"
+										rel="noreferrer"
+									>
+										View post
+									</a>
+								)}
 							</form>
 						</li>
 					))}
