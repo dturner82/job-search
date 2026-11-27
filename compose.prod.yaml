@@ -1,0 +1,38 @@
+name: job-search-prod
+
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3200:3000"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:/data/jobs.db
+    volumes:
+      - production-db:/data
+    command:
+      - sh
+      - -c
+      - npm run db:migrate && exec npm run start -- --hostname 0.0.0.0
+
+  collector:
+    profiles: ["collection"]
+    build: .
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:/data/jobs.db
+      ZOHO_HOST: ${ZOHO_HOST:-imap.zoho.eu}
+      ZOHO_PORT: ${ZOHO_PORT:-993}
+      ZOHO_FOLDER: ${ZOHO_FOLDER:-Job Alerts}
+      ZOHO_USER: ${ZOHO_USER:-}
+      ZOHO_PASSWORD: ${ZOHO_PASSWORD:-}
+    volumes:
+      - production-db:/data
+    command:
+      - sh
+      - -c
+      - npm run db:migrate && exec npm run collect
+
+volumes:
+  production-db:
